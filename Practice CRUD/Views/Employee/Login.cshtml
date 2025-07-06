@@ -1,0 +1,88 @@
+﻿@model Practice_CRUD.Models.User
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #fff1cc;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            text-align: center;
+            background-color: transparent;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 250px;
+            padding: 6px;
+            border: 1px solid #000;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            background-color: #cce5cc;
+            font-weight: bold;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+            .login-button:hover {
+                background-color: #b2d8b2;
+            }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form asp-action="Login" method="post">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input asp-for="Username" type="text" />
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input asp-for="Password" type="password" />
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <p class="error">@ViewBag.Message</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,81 @@
+﻿@model Practice_CRUD.Models.User
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            background-color: #fff1cc;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-container {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-box {
+            background-color: transparent;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 250px;
+            padding: 6px;
+            border: 1px solid #000;
+        }
+
+        .register-button {
+            padding: 8px 20px;
+            background-color: #cce5cc;
+            font-weight: bold;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background-color: #b2d8b2;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <h2>Register</h2>
+            <form asp-action="Register" method="post">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input asp-for="Username" type="text" />
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input asp-for="Password" type="password" />
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

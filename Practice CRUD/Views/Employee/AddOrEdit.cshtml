@@ -1,0 +1,58 @@
+﻿@model Employee
+@{
+    ViewBag.Title = "Add or Edit";
+    var hobbiesList = new List<string> { "Reading", "Swimming", "Playing", "Singing" };
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Department)
+        @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Date of Joining")
+        @Html.TextBoxFor(m => m.DOJ, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Gender")
+        @Html.DropDownListFor(m => m.Gender, new SelectList(new[] { "Male", "Female", "Other" }), "-- Select Gender --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Hobbies")
+        @foreach (var hobby in hobbiesList)
+        {
+            var checkboxId = "hobby_" + hobby.Replace(" ", "");
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="Hobbies" value="@hobby" id="@checkboxId"
+                @(Model.Hobbies != null && Model.Hobbies.Contains(hobby) ? "checked" : "") />
+                <label class="form-check-label" for="@checkboxId">@hobby</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary ml-2">Cancel</a>
+}

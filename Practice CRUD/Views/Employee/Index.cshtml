@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Practice_CRUD.Models.Employee>
+
+@{
+    ViewBag.Title = "Employee List";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #fff1cc;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 6px;
+            width: 200px;
+            margin-right: 5px;
+        }
+
+        button, .btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn-primary {
+            color: blue;
+        }
+
+        .btn-secondary {
+            color: gray;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff1cc;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(#ccc, #aaa);
+            font-weight: bold;
+        }
+
+        .action-icons a {
+            margin: 0 5px;
+            font-size: 18px;
+            color: #007bff; /* Blue */
+        }
+
+            .action-icons a:hover {
+                color: #0056b3;
+            }
+
+        .icon {
+            font-size: 18px;
+        }
+
+        /* Optional: If you want icons instead of text buttons */
+        .icon-eye::before {
+            content: "\1F441"; /* 👁 */
+        }
+
+        .icon-edit::before {
+            content: "\270E"; /* ✎ */
+        }
+
+        .icon-delete::before {
+            content: "\1F5D1"; /* 🗑 */
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee List</h2>
+
+    <form method="get" asp-action="Index">
+        <label><strong>Search List:</strong></label>
+        <input type="text" name="searchString"
+               value="@(ViewContext.HttpContext.Request.Query["searchString"].ToString())"
+               placeholder="Search by name..." />
+        <button type="submit">&#128269;</button> <!-- 🔍 -->
+        <a asp-action="Index" class="btn btn-secondary">Clear</a>
+    </form>
+
+    <p>
+        <a asp-action="AddOrEdit" asp-route-id="0" class="btn btn-primary">Add New Employee</a>
+    </p>
+
+    <p><strong>Search List Table:</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Date of Joining</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Name</td>
+                    <td>@emp.Department</td>
+                    <td>@emp.DOJ?.ToString("dd-MM-yyyy")</td>
+                    <td class="action-icons">
+                        <a asp-action="Details" asp-route-id="@emp.Id" title="View">&#128065;</a> <!-- 👁 -->
+                        <a asp-action="AddOrEdit" asp-route-id="@emp.Id" title="Edit">&#9998;</a> <!-- ✎ -->
+                        <a asp-action="Delete" asp-route-id="@emp.Id" title="Delete"
+                           onclick="return confirm('Are you sure you want to delete this employee?');">&#128465;</a> <!-- 🗑 -->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
